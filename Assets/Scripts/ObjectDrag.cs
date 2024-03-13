@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ObjectDrag : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 offset;
+
+    private void OnMouseDown()
     {
-        
+        offset = transform.position - BuildingSystem.GetMouseWorldPosition();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDrag()
     {
-        
+        Vector3 pos = BuildingSystem.GetMouseWorldPosition() + offset;
+        transform.position = BuildingSystem.current.SnapCoordinateToGrid(pos);
+
     }
 }
